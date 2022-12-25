@@ -34,7 +34,7 @@ export const PostDetail = () => {
     <Paper elevation={2}>
       <Container maxWidth='xl'>
         <PostDetailTop postDetail={postDetail} />
-        {postLikeTags?.posts?.length > 0 && (
+        {postLikeTags?.posts?.length > 1 && (
           <Box mt={4}>
             <Typography variant='body2' sx={{ fontSize: '18px' }}>
               You might also like:
