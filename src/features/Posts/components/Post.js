@@ -5,7 +5,7 @@ import CardContent from '@mui/material/CardContent';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import moment from 'moment';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { AiFillDelete, AiFillLike } from 'react-icons/ai';
 import { BiLike } from 'react-icons/bi';
 import { BsThreeDotsVertical } from 'react-icons/bs';
@@ -18,6 +18,7 @@ import './styles.scss';
 
 export const Post = ({ post }) => {
   const [creatorPost, setCreatorPost] = useState(false);
+  const img = useRef();
   const { posts, pagination, setLike } = useSelector(
     (state) => state.posts
   );
@@ -42,6 +43,13 @@ export const Post = ({ post }) => {
       if (user._id === post.creator) setCreatorPost(true);
     }
   }, [posts, user, post]);
+
+  useEffect(() => {
+    img.current.addEventListener(
+      'error',
+      () => (img.current.src = THUMNAIL)
+    );
+  }, [post]);
 
   return (
     <Card
@@ -89,9 +97,10 @@ export const Post = ({ post }) => {
 
       <Box height='180px' className='overlay'>
         <img
+          ref={img}
           height='100%'
           width='100%'
-          src={`${URL_IMAGE}/${post?.photo}` || THUMNAIL}
+          src={`${URL_IMAGE}/${post?.photo}`}
           alt={post.title}
         />
       </Box>

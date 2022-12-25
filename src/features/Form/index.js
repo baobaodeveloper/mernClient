@@ -13,6 +13,7 @@ import {
   setIdUpdatePostNull,
   updatePostDetail,
 } from '../Posts/postSlice';
+import { useRef } from 'react';
 
 const schema = yup
   .object({
@@ -24,6 +25,7 @@ const schema = yup
 
 export const Form = () => {
   const { enqueueSnackbar } = useSnackbar();
+
   const { id, posts, pagination } = useSelector(
     (state) => state.posts
   );
