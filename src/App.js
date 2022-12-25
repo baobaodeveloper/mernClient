@@ -1,24 +1,57 @@
-import logo from './logo.svg';
-import './App.css';
+import { Box } from '@mui/material';
+import { useSelector } from 'react-redux';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Loading } from './components/loading/Loading';
+import { Auth } from './features/auth';
+import { Home } from './pages/Home/Home';
+import { PostDetail } from './pages/PostDetail/PostDetail';
+import { HomeTemplate } from './template/HomeTemplate';
 
 function App() {
+  const { loading } = useSelector((state) => state.posts);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Box>
+      {loading && <Loading />}
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path='/'
+            element={
+              <HomeTemplate>
+                <Home />
+              </HomeTemplate>
+            }
+          />
+
+          <Route
+            path='/posts'
+            element={
+              <HomeTemplate>
+                <Home />
+              </HomeTemplate>
+            }
+          />
+
+          <Route
+            path='/auth'
+            element={
+              <HomeTemplate>
+                <Auth />
+              </HomeTemplate>
+            }
+          />
+
+          <Route
+            path='/posts/:id'
+            element={
+              <HomeTemplate>
+                <PostDetail />
+              </HomeTemplate>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
+    </Box>
   );
 }
 

@@ -68,7 +68,7 @@ export const Header = () => {
           textDecoration: 'none',
         }}
       >
-        <Typography component='h2' variant='h4' color='primary'>
+        <Typography component='h2' variant='h5' color='primary'>
           Memories
         </Typography>
         <Box width='60px'>

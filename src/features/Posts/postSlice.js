@@ -9,11 +9,11 @@ const postSlice = createSlice({
     pagination: {},
     loading: false,
     id: null,
+    setLike: 0,
   },
   reducers: {
     getAllPost: (state, action) => {
       state.posts = action.payload.posts;
-      state.like = action.payload.posts.like;
     },
     getPagination: (state, action) => {
       state.pagination = action.payload.pagination;
@@ -41,11 +41,9 @@ const postSlice = createSlice({
       );
 
       if (userAlreadyLike !== -1) {
-        // post.like.splice(userAlreadyLike, 1);
-        state.like += 1;
+        post.like.splice(userAlreadyLike, 1);
       } else {
-        // post.like.push(userCurrent._id);
-        state.like -= 1;
+        post.like.push(userCurrent._id);
       }
     },
   },
@@ -118,8 +116,8 @@ export const deletePost = (id, pagination) => async (dispatch) => {
 
 export const updateLikes = (id, pagination) => async (dispatch) => {
   try {
-    dispatch(increaseLike(id));
     const res = await postApi.updateLike(id);
+    dispatch(increaseLike(id));
     dispatch(
       fetchPost({ limit: pagination._limit, page: pagination._page })
     );

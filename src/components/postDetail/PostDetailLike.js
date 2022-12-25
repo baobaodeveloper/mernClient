@@ -20,8 +20,6 @@ export const PostDetailLike = ({ postLikeTags, idCurrent }) => {
   const handleClick = (id) => {
     dispatch(loading());
 
-    // navigate(`/posts/${id}`);
-
     const timeWait = setTimeout(() => navigate(`/posts/${id}`), 1000);
 
     return () => {

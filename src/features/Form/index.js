@@ -46,7 +46,7 @@ export const Form = () => {
   });
   const handleSubmitForm = async (values) => {
     const tags = { ...values }?.tags?.split(',');
-    console.log(tags);
+
     let endValues = {
       ...values,
       tags: tags,
@@ -83,7 +83,6 @@ export const Form = () => {
       if (id)
         enqueueSnackbar('Update post failed', { variant: 'error' });
       enqueueSnackbar('Create post failed', { variant: 'error' });
-      console.log(error);
     }
   };
 

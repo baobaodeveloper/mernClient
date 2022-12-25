@@ -21,8 +21,8 @@ export const PostDetail = () => {
   );
 
   useEffect(() => {
-    dispatch(noLoading());
     dispatch(getPost(id));
+    dispatch(noLoading());
   }, [id, dispatch]);
   useEffect(() => {
     if (postDetail) {

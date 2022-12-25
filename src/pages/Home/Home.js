@@ -64,10 +64,6 @@ export const Home = () => {
   };
 
   useEffect(() => {
-    navigate('/posts');
-  }, [navigate]);
-
-  useEffect(() => {
     navigate({
       pathname: navigate.pathname,
       search: queryString.stringify({
@@ -79,6 +75,10 @@ export const Home = () => {
   useEffect(() => {
     dispatch(fetchPost(queryParams));
   }, [queryParams, dispatch]);
+
+  useEffect(() => {
+    navigate('/posts');
+  }, [navigate]);
   return (
     <Grow in>
       <Grid

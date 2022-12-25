@@ -38,8 +38,8 @@ export const Login = ({ onSubmit }) => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      email: 'checkcheck@gmail.com',
-      password: 'Crocodile123',
+      email: '',
+      password: '',
     },
     resolver: yupResolver(schema),
   });

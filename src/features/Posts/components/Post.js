@@ -2,23 +2,25 @@ import { Box } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import { useDispatch, useSelector } from 'react-redux';
+import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { AiFillDelete, AiFillLike } from 'react-icons/ai';
 import { BiLike } from 'react-icons/bi';
 import { BsThreeDotsVertical } from 'react-icons/bs';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import moment from 'moment';
 import { THUMNAIL, URL_IMAGE } from '../../../constants/common';
-import { deletePost, idUpdatePost, updateLikes } from '../postSlice';
 import { upperCaseFirstLetter } from '../../../utils/common';
+import { deletePost, idUpdatePost, updateLikes } from '../postSlice';
+import './styles.scss';
 
 export const Post = ({ post }) => {
   const [creatorPost, setCreatorPost] = useState(false);
-  const { posts, pagination } = useSelector((state) => state.posts);
+  const { posts, pagination, setLike } = useSelector(
+    (state) => state.posts
+  );
   const user = JSON.parse(localStorage.getItem('user'));
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -85,14 +87,15 @@ export const Post = ({ post }) => {
         )}
       </Box>
 
-      <CardMedia
-        sx={{
-          objectFit: 'cover',
-        }}
-        component='img'
-        height='180px'
-        image={post.photo ? `${URL_IMAGE}/${post.photo}` : THUMNAIL}
-      />
+      <Box height='180px' className='overlay'>
+        <img
+          height='100%'
+          width='100%'
+          src={`${URL_IMAGE}/${post?.photo}` || THUMNAIL}
+          alt={post.title}
+        />
+      </Box>
+
       <Box display='flex' flexDirection='column' minHeight='200px'>
         <CardContent sx={{ paddingBottom: '0px' }}>
           <Box display='flex'>
@@ -133,8 +136,8 @@ export const Post = ({ post }) => {
             sx={{ display: 'flex', alignItems: 'center' }}
             color='primary'
           >
-            {post?.like?.filter((item) => item === user._id)?.length >
-            0 ? (
+            {post?.like?.filter((item) => item === user?._id)
+              ?.length > 0 ? (
               <AiFillLike />
             ) : (
               <BiLike />

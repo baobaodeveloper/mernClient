@@ -45,7 +45,7 @@ export const register = (data) => async (dispatch) => {
 export const login = (data) => async (dispatch) => {
   try {
     dispatch(loading());
-    console.log(data);
+
     const { user, token } = await authApi.login(data);
     localStorage.setItem('user', JSON.stringify(user));
     localStorage.setItem('token', JSON.stringify(token));
